@@ -31,8 +31,16 @@ void readFile(std::wifstream& wif, ConvWString2String& convWs2S, int par_size, s
 }
 
 int main(int argc, char** argv) {
+    if (argc != 3) {
+        std::cout << "Use: ./read_utf8_file UTF8_FILE COUNT_BYTES_TO_SPLIT" << std::endl;
+        return 0;
+    }
     std::string filename = argv[1];
     const int par_size = std::atoi(argv[2]);
+    if (par_size == 0) {
+        std::cerr << "Error: Get COUNT_BYTES_TO_SPLIT great then 0!" << std::endl;
+        return 1;
+    }
 
     ConvWString2String convWs2S;
     std::locale l1(std::locale("pl_PL.UTF-8"), new std::codecvt_utf8<wchar_t>);
