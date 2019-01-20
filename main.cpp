@@ -13,11 +13,9 @@
 typedef std::wstring_convert<std::codecvt_utf8<wchar_t>> ConvWString2String;
 
 void readFile(std::wifstream& wif, ConvWString2String& convWs2S, int par_size, std::vector<std::string>& dbusPayloads) {
-
     std::wstring wsBuffer(L"\0", par_size);
 
     while (wif) {
-        wsBuffer.resize(par_size, '\0');
         wif.read(const_cast<wchar_t*>(wsBuffer.data()), par_size);
         if (wif.gcount() < par_size) {
             wsBuffer.resize(wif.gcount());
